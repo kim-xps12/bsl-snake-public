@@ -1,6 +1,6 @@
 ## Installation
 
-1. Install venv for your python version. (You need replace "3.8" to your version.)
+1. Install venv for your python version. (You need to replace "3.8" to your version.)
 
    ```
    sudo apt install python3.8-venv 
@@ -8,7 +8,7 @@
 
 2. Clone this repository.
    ```
-   git 
+   git clone https://github.com/kim-xps12/bsl-snake.git
    ```
 
 3. Create venv and activate it.
