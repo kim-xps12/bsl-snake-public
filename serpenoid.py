@@ -26,7 +26,7 @@ ADDR_STS_PRESENT_POSITION = 56
 
 
 # Default setting
-SCS_IDS = [13, 12, 11, 10]
+SCS_IDS = [5, 4, 3, 2, 1]
 BAUDRATE = 1000000           # SCServo default baudrate : 1000000
 DEVICENAME = '/dev/ttyUSB0'
 SCS_MINIMUM_POSITION_VALUE = 1024 #100    # SCServo will rotate between this value
@@ -51,11 +51,11 @@ def getch():
     return ch
 
 
-def calc_angle(i, t):
-    A = 45 #[deg]
-    w = 3.5 #[rad/sec]
+def calc_angle(i, t, n):
+    A = 35 #45 #[deg]
+    w = 3 #3.5 #[rad/sec]
 
-    return A*np.sin(w*t + (2*PI*i)/3)
+    return A*np.sin(w*t + (2*PI*i)/n)
 
 
 """
@@ -157,10 +157,11 @@ def send_scs_params(scs_ids, params):
 def swing():
     t = 0 #[sec]
     dt = 0.050 #[sec]
+    n = len(SCS_IDS) #[-] number of joint
 
     while True:
 
-        angles = [calc_angle(i, t) for i in range(len(SCS_IDS))]
+        angles = [calc_angle(i, t, n) for i in range(n)]
         cmds = [conv_deg_cmd(angle) for angle in angles]
 
         # Allocate goal position value into byte array
